@@ -36,7 +36,7 @@ namespace backend.Controllers
             return Ok(newNote);
 
         }
-        // get
+        // Read
 
         [HttpGet]
         [Route("Get")]
@@ -50,7 +50,7 @@ namespace backend.Controllers
         // Update specific Note
         [HttpPut]
         [Route("Update/{id}")]
-        public async Task< IActionResult> UpdateNote([FromRoute] int id, [FromBody] NoteCreateUpdateDto dto)
+        public async Task< IActionResult> UpdateNote( int id, [FromBody] NoteCreateUpdateDto dto)
         {
             var note = await _context.Notes.FirstOrDefaultAsync(q => q.Id == id);
             if(note is null)
@@ -64,6 +64,8 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
             return Ok(note);   
         }
+
+        // 
 
 
     }
