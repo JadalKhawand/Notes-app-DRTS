@@ -50,7 +50,7 @@ namespace backend.Controllers
         // Update specific Note
         [HttpPut]
         [Route("Update/{id}")]
-        public async Task< IActionResult> UpdateNote( int id, [FromBody] NoteCreateUpdateDto dto)
+        public async Task< IActionResult> UpdateNote( [FromRoute] int id, [FromBody] NoteCreateUpdateDto dto)
         {
             var note = await _context.Notes.FirstOrDefaultAsync(q => q.Id == id);
             if(note is null)
@@ -65,7 +65,22 @@ namespace backend.Controllers
             return Ok(note);   
         }
 
-        // 
+        // Delete
+        [HttpDelete]
+        [Route("{id}")]
+
+        public async Task<IActionResult> DeleteNote([FromRoute] long id)
+        {
+            var note = await _context.Notes.FirstOrDefaultAsync(q => q.Id == id);
+            if(note is null)
+            {
+                return NotFound("Note was not found");
+            }
+            _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
+
+            return Ok("Note deleted successfully");
+        }
 
 
     }
