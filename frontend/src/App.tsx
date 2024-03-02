@@ -1,11 +1,15 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-red-500">this is my first text</h1>
+      <Navbar />
+      <div className="wrapper">
+        
+      </div>
     </div>
   );
 }
